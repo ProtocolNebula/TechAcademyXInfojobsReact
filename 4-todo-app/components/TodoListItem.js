@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 
 export default class TodoListItem extends Component {
     handleRemove = () => {
-        console.log(this);
         this.props.onRemove(
             this.props.idx
         )

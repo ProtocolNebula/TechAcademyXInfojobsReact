@@ -7,8 +7,6 @@ import TodoListItem from '../components/TodoListItem'
 class Todo extends Component {
     state = {
         elements: [
-            'test1',
-            'test2',
         ]
     }
 
@@ -35,9 +33,8 @@ class Todo extends Component {
     }
 
     handleRemoveElement = (idx) => {
-        console.log(idx);
         this.setState((prevState) => ({
-            todos: [
+            elements: [
                 ...this.state.elements.slice(0, idx),
                 ...this.state.elements.slice(idx + 1),
             ]
@@ -52,19 +49,19 @@ class Todo extends Component {
                         onAdd={this.handleAddElement}
                     />
                 </div>
-                <TodoList>
-                    {
-                        this.state.elements.map((todo, index) => {
-                        return (<TodoListItem
-                            key={index}
-                            onRemove={ this.handleRemoveElement }>
-                            {todo}
-                        </TodoListItem>)
-                    })
-                }
-                </TodoList>
-                    {/* <div className="task-list">
-                    </div> */}
+                <div className="task-list">
+                    <TodoList>
+                        {
+                            this.state.elements.map((todo, index) => {
+                            return (<TodoListItem
+                                idx={index}
+                                onRemove={ this.handleRemoveElement }>
+                                {todo}
+                            </TodoListItem>)
+                        })
+                    }
+                    </TodoList>
+                </div>
             
                 <style jsx>{`
                     .todo-box {
@@ -75,7 +72,7 @@ class Todo extends Component {
                     }
                     .task-list {
                         max-height: 500px;
-                        // overflow: auto;
+                        overflow: auto;
                     }
                 `}</style>
             </div>
