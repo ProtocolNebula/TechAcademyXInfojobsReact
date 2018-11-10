@@ -12,11 +12,11 @@ class Task extends Component {
         status: STATES.TODO
     }
 
-    render() {
-        retrun (
+    // render() {
+    //     return (
             
-        )
-    }
+    //     )
+    // }
 }
 
 export default Task;

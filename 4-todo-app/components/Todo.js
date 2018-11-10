@@ -1,9 +1,15 @@
 import react, { Component } from 'react'
 import TodoInput from '../components/TodoInput'
+import Task from '../components/Task'
+import TodoList from '../components/TodoList'
+import TodoListItem from '../components/TodoListItem'
 
 class Todo extends Component {
     state = {
-        elements: []
+        elements: [
+            'test1',
+            'test2',
+        ]
     }
 
     /**
@@ -11,12 +17,30 @@ class Todo extends Component {
      * @param {string} text 
      */
     handleAddElement = (text) => {
-        console.log('Text received')
+        this.setState((prevState) => ({
+            elements: [
+                ...prevState.elements,
+                text
+            ]
+        }))
     }
 
-    handleInputChange = inputValue => {
+    /**
+     * Cambia el estado con el valor del input
+     */
+    handleInputChange = todoValue => {
         this.setState(() => ({
-            inputValue
+            todoValue
+        }));
+    }
+
+    handleRemoveElement = (idx) => {
+        console.log(idx);
+        this.setState((prevState) => ({
+            todos: [
+                ...this.state.elements.slice(0, idx),
+                ...this.state.elements.slice(idx + 1),
+            ]
         }));
     }
 
@@ -28,9 +52,19 @@ class Todo extends Component {
                         onAdd={this.handleAddElement}
                     />
                 </div>
-                <div className="task-list">
-
-                </div>
+                <TodoList>
+                    {
+                        this.state.elements.map((todo, index) => {
+                        return (<TodoListItem
+                            key={index}
+                            onRemove={ this.handleRemoveElement }>
+                            {todo}
+                        </TodoListItem>)
+                    })
+                }
+                </TodoList>
+                    {/* <div className="task-list">
+                    </div> */}
             
                 <style jsx>{`
                     .todo-box {
@@ -41,7 +75,7 @@ class Todo extends Component {
                     }
                     .task-list {
                         max-height: 500px;
-                        overflow: auto;
+                        // overflow: auto;
                     }
                 `}</style>
             </div>

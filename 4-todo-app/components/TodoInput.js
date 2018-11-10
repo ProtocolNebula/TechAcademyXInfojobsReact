@@ -20,7 +20,6 @@ class TodoInput extends Component {
         event.preventDefault();
         event.stopPropagation();
 
-        console.log('handleded submit');
         if (this.state.todo) {
             this.props.onAdd(this.state.todo)
             this.setState(() => ({ todo: '' }))
